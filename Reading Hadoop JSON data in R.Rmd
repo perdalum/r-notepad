@@ -8,6 +8,7 @@ A small example on how to ingest data from an IBM Text Analytics job run on BigI
 ```{r}
 library(jsonlite)
 library(magrittr)
+library(knitr)
 ```
 
 Output from a Text Analytics job is described thus:
@@ -28,6 +29,12 @@ This gives us a data frame with this structure for further analysis.
 
 ```{r}
 str(df)
+```
+
+Same data frame in a table format for printing
+
+```{r}
+kable(head(df), format = "markdown")
 ```
 
 
