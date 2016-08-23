@@ -3,7 +3,7 @@ title: "Reading Hadoop JSON in R"
 output: html_notebook
 ---
 
-A small example on how to ingest data from an IBM Text Analytics job run on BigInsights 4.1. The Text Analytics job that created the data was the [BigInsights Starter Kit #2][starterkit]
+A small example on how to ingest data from an IBM Text Analytics job run on BigInsights 4.1. The Text Analytics job that created the data was the [BigInsights Starter Kit #2][starterkit].
 
 ```{r}
 library(jsonlite)
