@@ -1,0 +1,57 @@
+---
+title: "First SparkR Notebook"
+output: html_notebook
+---
+This small example is taken almost verbatim from [sparklyr — R interface for Apache Spark](http://spark.rstudio.com).
+
+Begin by loading the library and ensure Spark version 1.6.1 is installed
+
+```{r}
+library(dplyr)
+library(sparklyr)
+spark_install(version = "1.6.1")
+```
+
+Create a Spark context
+
+```{r}
+sc <- spark_connect(master = "local")
+```
+
+This Spark instance can be monitored in the Spark tab. So, let's load some data
+
+```{r}
+iris_tbl <- copy_to(sc, iris)
+flights_tbl <- copy_to(sc, nycflights13::flights, "flights")
+batting_tbl <- copy_to(sc, Lahman::Batting, "batting")
+```
+
+List all the tables in the Spark context
+```{r}
+src_tbls(sc)
+```
+
+Now, chose all flights that were delayed 2 (hours?) in departure
+```{r}
+flights_tbl %>% filter(dep_delay == 2)
+```
+
+Well, let's make a graphic that shows a delay and distance. First create the data set to visualise
+```{r}
+delay <- flights_tbl %>% 
+   group_by(tailnum) %>% 
+   summarise(count = n(), dist = mean(distance), delay = mean(arr_delay)) %>% 
+   filter(count > 20, dist < 2000, !is.na(delay)) %>% 
+   collect
+```
+
+and create the plot
+```{r}
+library(ggplot2)
+
+ggplot(delay, aes(dist, delay)) +
+   geom_point(aes(size = count), alpha = 1/2) +
+   geom_smooth() +
+   scale_size_area(max_size = 2)
+```
+
