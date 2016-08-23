@@ -1,0 +1,29 @@
+---
+title: "R DiagrammeR Notebook"
+output: html_notebook
+---
+
+```{r}
+library(DiagrammeR)
+```
+
+Eksemplerne er taget fra [DiagrammeR](http://rich-iannone.github.io/DiagrammeR/io.html#r-markdown)
+
+Først et enkelt **Graphviz** eksempel
+
+```{r}
+DiagrammeR::grViz("
+digraph rmarkdown {
+A -> B
+}
+", height = 200)
+```
+Det virker jo bare uden problemer!! En anden *engine* er mermaid, hvad der så end er
+
+```{r}
+DiagrammeR::mermaid("
+graph LR
+A --> B
+", height = 200)
+```
+

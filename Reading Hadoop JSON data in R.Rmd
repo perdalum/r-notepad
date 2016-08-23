@@ -1,0 +1,35 @@
+---
+title: "Reading Hadoop JSON in R"
+output: html_notebook
+---
+
+A small example on how to ingest data from an IBM Text Analytics job run on BigInsights 4.1. The Text Analytics job that created the data was the [BigInsights Starter Kit #2][starterkit]
+
+```{r}
+library(jsonlite)
+library(magrittr)
+```
+
+Output from a Text Analytics job is described thus:
+
+> The format of the result files is in Hadoop split-able JSON Text format, with one result record per line. Each result record will contain a document label value that is derived from the column provided for 'label'. If no input column is provided for the 'label' column, an auto-generated unique ID is used in its place
+
+(See [Run extractors on distributed files from the web tool][f01])
+
+Therefore we cannot read JSON as a complete file, but must read one line at a time. This is done using `stream_in` from `jsonlite`. Before reading the data, the data is, for this small example, copied fra the cluster to the local laptop and placed on the desktop
+
+```{r, message=FALSE, warning=FALSE}
+df <- "~/Desktop/Productsentiment0-r-00000" %>% 
+   file %>% 
+   stream_in
+```
+
+This gives us a data frame with this structure for further analysis.
+
+```{r}
+str(df)
+```
+
+
+[starterkit]: https://ibm-open-platform.ibm.com/biginsights/starterkits/biginsights-starter-kit2/starterkit2.html#/starterkit "Unearth product perception from raw Twitter data using Text Analytics"
+[f01]: https://www.ibm.com/support/knowledgecenter/SSPT3X_4.1.0/com.ibm.swg.im.infosphere.biginsights.text.doc/doc/ana_txtan_runiewt.html "Run extractors on distributed files from the web tool"
