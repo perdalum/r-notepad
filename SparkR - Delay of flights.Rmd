@@ -1,6 +1,8 @@
 ---
 title: "First SparkR Notebook"
-output: html_notebook
+output:
+  html_document: default
+  html_notebook: default
 ---
 This small example is taken almost verbatim from [sparklyr — R interface for Apache Spark](http://spark.rstudio.com).
 

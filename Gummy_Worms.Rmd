@@ -1,6 +1,7 @@
 ---
-title: "R Kladde Notebook"
-output: html_notebook
+title: "R GL Notebook"
+output:
+  html_notebook: default
 ---
 ```{r}
 library(rgl)
@@ -33,3 +34,16 @@ frink %>%
    image_border("red", "10x10")
 
 ```
+
+Another more simple plot using the R provided iris data set. Oh, use rglwidget to display the 3D scene within the HTML code
+```{r}
+library(rglwidget)
+```
+
+```{r}
+with(iris, plot3d(Sepal.Length, Sepal.Width, Petal.Length, 
+                  type = "s", col = as.numeric(Species)))
+rglwidget()
+```
+
+

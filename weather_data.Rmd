@@ -1,0 +1,35 @@
+---
+title: "Weather data"
+output: html_notebook
+---
+
+# install the library
+
+```{r}
+#install.packages('weatherData') # only do this once
+```
+load the library
+
+```{r}
+library(weatherData)
+```
+
+Get the temperature data for Aarhus Airport that has airport code AAR (found using Google).
+
+```{r}
+getWeatherForDate("AAR", "2016-08-01")
+```
+
+Then what about Copenhagen with code CPH?
+```{r}
+getWeatherForDate("CPH", "2016-08-01")
+```
+
+Hm, the URL for Aarhus Airport gives this data when requested directly in the browser
+
+```
+CEST,Maks. temperaturC,MiddeltemperaturC,Min. temperaturC,DugpunktC,MeanDew PointC,Min DewpointC,Max Luftfugtighed, Mean Luftfugtighed, Min Luftfugtighed, Max HavoverfladetrykhPa, Mean HavoverfladetrykhPa, Min HavoverfladetrykhPa, Max SigtbarhedKm, Mean SigtbarhedKm, Min SigtbarhedkM, Max VindhastighedKm/h, Mean VindhastighedKm/h, Max VindstødshastighedKm/h,Nedbørmm, CloudCover, Hændelser,WindDirDegrees
+2016-8-1,21,16,10,11,9,6,88,63,32,1014,1012,1011,31,12,2,32,10,,0.00,4,Tåge-Regn,250
+```
+
+The problem could be that the response in in Danish? So, how to change that?
