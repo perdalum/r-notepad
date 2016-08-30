@@ -1,0 +1,29 @@
+---
+title: "R Dates"
+output: html_notebook
+---
+Date aritmetics etc can be done easily wth the [lubridate package](https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html)
+
+```{r}
+library(lubridate)
+```
+
+```{r}
+ymd("20160829")
+```
+
+```{r}
+begin <- ymd_hms("2015-09-28 12:00:00")
+end <- ymd_hms("2016-08-29 12:00:00")
+```
+
+```{r}
+interval(begin, end)/ddays()
+```
+
+Eller nemmere:
+
+```{r}
+(ymd("2015-09-28") %--% ymd("2016-08-29")) / ddays()
+```
+
